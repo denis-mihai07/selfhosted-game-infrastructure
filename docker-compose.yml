@@ -34,7 +34,7 @@ services:
       autocreate: 2
       difficulty: 0
       maxplayers: 15
-      password: "parola12@"
+      password: ${TERARRIA_PASSWORD}
       motd: ""
     volumes:
       - ./Terraria/Worlds:/root/.local/share/Terraria/Worlds/
