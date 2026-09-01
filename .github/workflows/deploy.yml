@@ -38,7 +38,7 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd ~/Infrastructure
+            cd ~/Apps/Server-Hosting
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
