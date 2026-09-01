@@ -1,0 +1,40 @@
+services:
+  mc-server:
+    image: itzg/minecraft-server:latest
+    container_name: mc-server
+    restart: always
+    ports:
+      - "25565:25565"
+    mem_limit: 3g
+    cpus: 2
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "LATEST"
+      MEMORY: "2G"
+      MOTD: "server mc homelab"
+      MAX_PLAYERS: 15
+      DIFFICULTY: "normal"
+      VIEW_DISTANCE: 10
+    volumes:
+      - ./Minecraft/data:/data
+
+  terraria-server:
+    image: hexlo/terraria-server-docker:latest
+    container_name: terraria-server
+    restart: always
+    ports:
+      - "7777:7777"
+    mem_limit: 2g
+    cpus: 2
+    stdin_open: true
+    tty: true
+    environment:
+      world: "world-1.wld"
+      autocreate: 2
+      difficulty: 0
+      maxplayers: 15
+      password: "parola12@"
+      motd: ""
+    volumes:
+      - ./Terraria/Worlds:/root/.local/share/Terraria/Worlds/
