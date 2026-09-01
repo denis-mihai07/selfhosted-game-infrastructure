@@ -20,7 +20,7 @@ services:
       - ./Minecraft/data:/data
 
   terraria-server:
-    image: jacobalberty/tmodloader:latest
+    image: hexlo/terraria-tmodloader-server:latest
     container_name: terraria-server
     restart: always
     ports:
@@ -38,5 +38,4 @@ services:
       password: ${TERARRIA_PASSWORD}
       motd: ${TERRARIA_MOTD}
     volumes:
-      - ./tModLoader/Worlds:/home/tml/.local/share/Terraria/tModLoader/Worlds
-      - ./tModLoader/Mods:/home/tml/.local/share/Terraria/tModLoader/Mods
+      - ./tModLoader:/home/tml/.local/share/Terraria/tModLoader
