@@ -20,7 +20,7 @@ services:
       - ./Minecraft/data:/data
 
   terraria-server:
-    image: hexlo/terraria-server-docker:latest
+    image: jacobalberty/tmodloader:latest
     container_name: terraria-server
     restart: always
     ports:
@@ -30,11 +30,13 @@ services:
     stdin_open: true
     tty: true
     environment:
-      world: "world-1.wld"
-      autocreate: 2
-      difficulty: 0
-      maxplayers: 15
+      world: "${TERRARIA_WORLD_NAME}.wld"
+      autocreate: ${TERRARIA_WORLD_SIZE}
+      seed: ${TERRARIA_SEED}
+      difficulty: ${TERRARIA_DIFFICULTY}
+      maxplayers: ${TERRARIA_MAX_PLAYERS}
       password: ${TERARRIA_PASSWORD}
-      motd: ""
+      motd: ${TERRARIA_MOTD}
     volumes:
-      - ./Terraria/Worlds:/root/.local/share/Terraria/Worlds/
+      - ./tModLoader/Worlds:/home/tml/.local/share/Terraria/tModLoader/Worlds
+      - ./tModLoader/Mods:/home/tml/.local/share/Terraria/tModLoader/Mods
