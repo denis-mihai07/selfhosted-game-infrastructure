@@ -1,41 +1,25 @@
-services:
-  mc-server:
-    image: itzg/minecraft-server:latest
-    container_name: mc-server
-    restart: always
-    ports:
-      - "25565:25565"
-    mem_limit: 3g
-    cpus: 2
-    environment:
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      VERSION: "LATEST"
-      MEMORY: "2G"
-      MOTD: "server mc homelab"
-      MAX_PLAYERS: 15
-      DIFFICULTY: "normal"
-      VIEW_DISTANCE: 10
-    volumes:
-      - ./Minecraft/data:/data
+version: "3.0"
 
-  terraria-server:
-    image: jacobsmile/tmodloader1.4:latest
-    container_name: terraria-server
-    restart: always
+services:
+  tml:
+    container_name: tml
+    restart: unless-stopped
+    #platform: linux/amd64 # Enable if you are running Docker on an ARM machine
+    build:
+      context: .
+      # args:
+      #   TMLVERSION: v2023.8.3.3
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     ports:
-      - "7777:7777"
-    mem_limit: 2g
-    cpus: 2
-    stdin_open: true
+      - 7777:7777
     tty: true
-    environment:
-      TMOD_WORLDNAME: "${TERRARIA_WORLD_NAME}"
-      TMOD_WORLDSIZE: "${TERRARIA_WORLD_SIZE}"
-      TMOD_WORLDSEED: "${TERRARIA_SEED}"
-      TMOD_DIFFICULTY: "${TERRARIA_DIFFICULTY}"
-      TMOD_MAXPLAYERS: "${TERRARIA_MAX_PLAYERS}"
-      TMOD_PASS: "${TERRARIA_PASSWORD}"
-      TMOD_MOTD: "${TERRARIA_MOTD}"
+    stdin_open: true
     volumes:
-      - ./tModLoader:/data
+      - ./tModLoader:/tModLoader
+      # Optional volumes below. These files/folders MUST exist on the host
+      # before they can be mounted, otherwise they will appear as owned by root
+      #- ./tModLoader/logs:/home/tml/server/tModLoader-Logs
+      #- ./tModLoader/banlist.txt:/home/tml/server/banlist.txt
+      #- ./tModLoader/cli-argsConfig.txt:/home/tml/server/cli-argsConfig.txt

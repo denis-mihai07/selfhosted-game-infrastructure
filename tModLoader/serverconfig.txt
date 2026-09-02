@@ -1,0 +1,7 @@
+world=/tModLoader/Worlds/myworld.wld
+autocreate=2
+worldname=myworld
+difficulty=1
+maxplayers=8
+password=
+motd=My tModLoader Server
